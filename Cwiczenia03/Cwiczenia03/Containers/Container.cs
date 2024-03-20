@@ -4,18 +4,31 @@ namespace Cwiczenia03.Containers;
 
 public abstract class Container : IContainer
 {
+    public double OwnMass { get; set; }
     public double CargoWeight { get; set; }
-    protected Container(double cargoWeight)
+    public double MaxCargoWeight { get; set; }
+    public double Height { get; set; }
+    public double Depth { get; set; }
+    public string SerialNumber { get; set; }
+    protected Container(double ownMass, double maxCargoWeight, int height, int depth, string serialPrefix, int serialCount)
     {
-        CargoWeight = cargoWeight;
+        OwnMass = ownMass;
+        MaxCargoWeight = maxCargoWeight;
+        Height = height;
+        Depth = depth;
+        SerialNumber = "KON-" + serialPrefix + serialCount;
     }
+
+    public override string ToString()
+    {
+        return this.GetType().Name +" | " + OwnMass + ", " + MaxCargoWeight + ", " + Height + ", " + Depth + ", " + SerialNumber;
+    }
+
     public virtual void Load(double cargoWeight)
     {
-        if (cargoWeight > 1000)
-        {
-            throw new OverflowException();
-        }
-        throw new NotImplementedException();
+        Console.WriteLine("Ladowanie kontenra w toku ...");
+        CargoWeight = cargoWeight;
+        Console.WriteLine(this.GetType().Name + " zostal zaladowany");
     }
 
     public void Unload()
