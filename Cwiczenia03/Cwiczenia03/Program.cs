@@ -12,9 +12,21 @@ using Cwiczenia03.Containers;
 // int? x;
 // x = null;
 
-LiquidContainer lc = new LiquidContainer(1100, 6000, 350, 700);
-lc.Load(5900);
+LiquidContainer lc = new LiquidContainer();
+//lc.Load(30000);
+//lc.Load(23000);
+//lc.Load(10000);
+//lc.Unload();
+//Console.WriteLine(lc.ToString());
 
-// Console.WriteLine(lc.ToString());
-// lc.Load(3500);
-// Console.WriteLine(lc.ToString());
+GasContainer gc = new GasContainer();
+gc.Load(21000);
+Console.WriteLine(gc.ToString());
+gc.Unload();
+Console.WriteLine(gc.ToString());
+gc.Unload();
+Console.WriteLine(gc.ToString());
+
+CooledContainer cc = new CooledContainer(PossibleProducts.Bananas, 22.3);
+
+//Console.WriteLine(lc.ToString());

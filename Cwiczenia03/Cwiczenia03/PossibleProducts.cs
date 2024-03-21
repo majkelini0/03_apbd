@@ -1,6 +1,6 @@
 namespace Cwiczenia03;
 
 public enum PossibleProducts
-{
-    Banana, Orange, Pomidorro, Strawberry
+{ 
+    Bananas, Chocolate, Fish, Meat, Ice_cream, Frozen_pizza, Cheese, Sausages, Butter, Eggs
 }
