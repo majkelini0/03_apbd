@@ -1,3 +1,5 @@
+using Cwiczenia03.Containers;
+
 namespace Cwiczenia03.Interfaces;
 
 public interface IContainer
@@ -8,6 +10,11 @@ public interface IContainer
     }
 
     void Unload()
+    {
+        
+    }
+
+    void ReturnSerial()
     {
         
     }

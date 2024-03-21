@@ -25,7 +25,7 @@ public class LiquidContainer : Container, IHazardNotifier
         {
             hazardMaterialInside = true;
             if (MaxCargoWeight * 0.5 <= cargoWeight)
-                NotifyHazard("Masa krytyczyna kontenera dla substacji niebezpiecznej zostala przekroczona\n" +
+                NotifyHazard("Masa krytyczyna kontenera dla substacji niebezpiecznej zostala przekroczona! " +
                              "Kontener nie zostanie zaladowany");
             else
                 base.Load(cargoWeight);   
@@ -34,7 +34,7 @@ public class LiquidContainer : Container, IHazardNotifier
         {
             if (MaxCargoWeight * 0.9 <= cargoWeight)
             {
-                NotifyHazard("Masa krytyczna 90% zostala osiagnieta\n" +
+                NotifyHazard("Masa krytyczna 90% zostala osiagnieta! " +
                              "Kontener nie zostanie zaladowany");
             }
             else

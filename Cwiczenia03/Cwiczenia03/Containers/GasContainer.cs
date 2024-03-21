@@ -18,8 +18,8 @@ public class GasContainer : Container, IHazardNotifier
     public override void Load(double cargoWeight)
     {
         if (cargoWeight > MaxCargoWeight)
-            throw new OverFillException("Ladunek przekracza ladownosc kontenera! " +
-                                        "Kontener " + this.GetType().Name + " " + SerialNumber + " nie zostanie zaladowany");
+            throw new OverFillException("Ladunek przekracza ladownosc kontenera! " + "Kontener " 
+                + this.GetType().Name + " " + SerialNumber + " nie zostanie zaladowany");
         if (cargoWeight >= 0.05 * MaxCargoWeight)
         {
             base.Load(cargoWeight);
@@ -35,9 +35,11 @@ public class GasContainer : Container, IHazardNotifier
             NotifyHazard("Minimalna masa ladunku nie jest spelniona! Kontener nie moze zostac bardziej rozladowany");
         else
         {
+            Console.WriteLine("Rozladunek kontenra w toku ...");
             double toUnload = CargoWeight - 0.05 * MaxCargoWeight;
             CargoWeight -= toUnload;
             pressure = 95 * CargoWeight / MaxCargoWeight;   
+            Console.WriteLine(this.GetType().Name + " " + this.SerialNumber + " zostal rozladowany");
         }
     }
     public void NotifyHazard(string msg)

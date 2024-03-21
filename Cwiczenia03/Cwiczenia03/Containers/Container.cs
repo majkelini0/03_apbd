@@ -25,8 +25,8 @@ public abstract class Container : IContainer
 
     public override string ToString()
     {
-        return this.GetType().Name + " ser[" + SerialNumber + "], ownMass[" + OwnMass + "], maxCargo[" + MaxCargoWeight + "], cargo[" +
-               CargoWeight + "], height[" + Height + "], width[" + Width + "], depth[" + Depth + "]";
+        return this.GetType().Name + " ser[" + SerialNumber + "], ownMass[" + OwnMass + "kg], maxCargo[" + MaxCargoWeight + "kg], cargo[" +
+               CargoWeight + "kg], height[" + Height + "cm], width[" + Width + "cm], depth[" + Depth + "cm]";
     }
 
     public virtual void Load(double cargoWeight)
@@ -41,5 +41,10 @@ public abstract class Container : IContainer
         Console.WriteLine("Rozladunek kontenra w toku ...");
         CargoWeight = 0;
         Console.WriteLine(this.GetType().Name + " " + this.SerialNumber + " zostal rozladowany");
+    }
+
+    public string ReturnSerial()
+    {
+        return SerialNumber;
     }
 }
