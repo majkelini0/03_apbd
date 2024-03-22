@@ -11,7 +11,7 @@ public abstract class Container : IContainer
     protected double Width { get; }
     protected double Depth { get; }
     //private string serialNumber; // field
-    protected string SerialNumber { get; } // property
+    public string SerialNumber { get; } // property
     protected Container(double ownMass, double maxCargoWeight, string serialPrefix, int serialCount)
     {
         CargoWeight = 0;
@@ -21,12 +21,6 @@ public abstract class Container : IContainer
         Width = 230;
         Depth = 1200;
         SerialNumber = "KON-" + serialPrefix + serialCount;
-    }
-
-    public override string ToString()
-    {
-        return this.GetType().Name + " ser[" + SerialNumber + "], ownMass[" + OwnMass + "kg], maxCargo[" + MaxCargoWeight + "kg], cargo[" +
-               CargoWeight + "kg], height[" + Height + "cm], width[" + Width + "cm], depth[" + Depth + "cm]";
     }
 
     public virtual void Load(double cargoWeight)
@@ -43,8 +37,13 @@ public abstract class Container : IContainer
         Console.WriteLine(this.GetType().Name + " " + this.SerialNumber + " zostal rozladowany");
     }
 
-    public string ReturnSerial()
+    public void ContainerInfo()
     {
-        return SerialNumber;
+        Console.WriteLine(this);
+    }
+    public override string ToString()
+    {
+        return this.GetType().Name + " ser[" + SerialNumber + "], ownMass[" + OwnMass + "kg], maxCargo[" + MaxCargoWeight + "kg], cargo[" +
+               CargoWeight + "kg], height[" + Height + "cm], width[" + Width + "cm], depth[" + Depth + "cm]";
     }
 }

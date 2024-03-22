@@ -13,9 +13,4 @@ public interface IContainer
     {
         
     }
-
-    void ReturnSerial()
-    {
-        
-    }
 }

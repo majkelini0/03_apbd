@@ -12,81 +12,78 @@ class Program
     static void Main()
     {
         LiquidContainer lc = new LiquidContainer();
-        Console.WriteLine(lc);
+        lc.ContainerInfo();
         lc.Load(10000);
-        Console.WriteLine(lc);
+        lc.ContainerInfo();
 // lc.Load(25000); // -> OverFillException
 // lc.Load(13000); // (gdy Hazrad = true) -> IHazardNotifier >50%
 // lc.Load(22000); // (gdy Hazrad = false) -> IHazardNotifier >90%
 
         GasContainer gc = new GasContainer();
         gc.Load(100);
-        Console.WriteLine(gc);
+        gc.ContainerInfo();
         gc.Load(19500);
-        Console.WriteLine(gc);
+        gc.ContainerInfo();
         gc.Unload();
-        Console.WriteLine(gc);
+        gc.ContainerInfo();
         gc.Unload();
-        Console.WriteLine(gc);
+        gc.ContainerInfo();
 
         CooledContainer cc = new CooledContainer(PossibleProducts.Banana, 13.3);
 // CooledContainer cc = new CooledContainer(PossibleProducts.Banana, 10); // -> LowTempException
-        Console.WriteLine(cc);
+        cc.ContainerInfo();
         cc.Load(24000);
-        Console.WriteLine(cc);
+        cc.ContainerInfo();
         cc.Unload();
-        Console.WriteLine(cc);
-
-        Ship orzel = new Ship(41, 19500, 429000000);
-        orzel.loadContainerOnShip(gc);
-        orzel.loadContainerOnShip(lc);
-        orzel.loadContainerOnShip(cc);
-//Console.WriteLine(orzel.List);
-        orzel.unloadContainerFromShip("KON-L-0");
-        orzel.DisplayLoadedContainers();
-
-        Ship marek = new Ship(39, 18000, 396000000);
-        ShipInfo(marek);
-        ContainerInfo(lc);
+        cc.ContainerInfo();
         
-        //TransferContainerBetweenShips(orzel, marek, "KON-C-0");
-        marek.DisplayLoadedContainers();
+        Console.WriteLine();
         
+        Console.WriteLine("Orzel");
+        Ship orzel = new Ship(41, 19500, 429000000, "Orzel");
+        orzel.LoadContainerOnShip(gc);
+        orzel.LoadContainerOnShip(lc);
+        orzel.LoadContainerOnShip(cc);
+
+        orzel.UnloadContainerFromShip("KON-L-0");
+        orzel.LoadedContainers();
+
+        Console.WriteLine("Marek");
+        Ship marek = new Ship(39, 18000, 396000000, "Marek");
         
-    }
-    static void ContainerInfo(Cwiczenia03.Containers.Container c)
-    {
-        Console.WriteLine(c);
-    }
+        Console.WriteLine("Swap kontenerow");
+        orzel.TransferContainerBetweenShips(marek, "KON-C-0");
+        Console.WriteLine("Swap kontenerow");
+        orzel.TransferContainerBetweenShips(marek, "KON-C-2");
+        orzel.LoadedContainers();
+        marek.ShipInfo();
+        marek.LoadedContainers();
+        
+        Console.WriteLine("ReplaceContainerWith");
+        marek.ReplaceContainerWith("KON-C-0", new CooledContainer(PossibleProducts.Chocolate, 20.66));
+        marek.LoadedContainers();
 
-    static void ShipInfo(Ship s)
-    {
-        Console.WriteLine(s);
-    }
-    public static void TransferContainerBetweenShips(Ship sourceShip, Ship targetShip, string containerSerialNumber)
-    {
-        Container containerToTransfer = null;
-        foreach (Container container in sourceShip.List)
-        {
-            if (container.ReturnSerial() == containerSerialNumber)
-            {
-                containerToTransfer = container;
-                break;
-            }
-        }
+        Console.WriteLine("TEST\n");
+        List<Container> myList = new List<Container>();
+        Ship koko = new Ship(43, 17000, 340000000, "Koko");
 
-        if (containerToTransfer != null)
+        GasContainer gc1 = new GasContainer();
+        GasContainer gc2 = new GasContainer();
+        koko.LoadContainerOnShip(gc1);
+        koko.LoadContainerOnShip(gc2);
+        for (int i = 0; i < 5; i++)
         {
-            sourceShip.List.Remove(containerToTransfer);
-            Console.WriteLine("Kontener o numerze seryjnym" + containerSerialNumber + " został usunięty ze statku źródłowego");
-            
-            targetShip.loadContainerOnShip(containerToTransfer);
-            Console.WriteLine("Kontener o numerze seryjnym " + containerSerialNumber + " został dodany do statku docelowego");
+            koko.LoadContainerOnShip(new GasContainer());   
         }
-        else
-        {
-            Console.WriteLine("Kontener o numerze seryjnym " + containerSerialNumber + " nie został znaleziony na statku źródłowym");
-        }
+        koko.LoadedContainers();
+        
+        myList.Add(new GasContainer());
+        myList.Add(new GasContainer());
+        myList.Add(gc1);
+        myList.Add(gc2);
+        
+        koko.LoadContainerList(myList);
+        koko.LoadedContainers();
     }
 }
 
